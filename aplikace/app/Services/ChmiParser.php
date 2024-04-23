@@ -245,7 +245,8 @@ ale taky
         $xmlstr = file_get_contents ( $file );
         $xml = new SimpleXMLElement($xmlstr);
         foreach( $xml->info as $info ) {
-            if( $info->language == 'cs' && !( $info->responseType=='None' || $info->responseType=='AllClear' || "{$info->responseType}"==='') ) {
+            // 2024-04-23 drive tu bylo i || "{$info->responseType}"==='' , ale nyni je tam vystraha bez polozky responseType
+            if( $info->language == 'cs' && !( $info->responseType=='None' || $info->responseType=='AllClear' ) ) {
                 Logger::log( 'app', Logger::DEBUG ,  "  {$info->language} '{$info->event}' {$info->responseType} {$info->urgency} {$info->severity} {$info->certainty}" );
                 if( ! $this->overPozici( $info, $id ) ) {
                     Logger::log( 'app', Logger::DEBUG ,  "    mimo moji pozici" );
